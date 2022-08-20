@@ -29,9 +29,9 @@ public class PedidoVendaController {
   @Autowired
   private UsuarioService serviceUsuario;
 
-  @GetMapping("/api/pedidovenda")
-  public ResponseEntity<List<PedidoVenda>> index() {
-      return ResponseEntity.status(HttpStatus.OK).body(service.index());
+  @GetMapping("/api/pedidovenda/{IdPedidoVenda}")
+  public ResponseEntity<PedidoVenda> findById(@PathVariable Long IdPedidoVenda ) {
+      return ResponseEntity.status(HttpStatus.OK).body(service.findById(IdPedidoVenda));
   }
   
   @PostMapping("/api/pedidovenda/{idUsuario}")

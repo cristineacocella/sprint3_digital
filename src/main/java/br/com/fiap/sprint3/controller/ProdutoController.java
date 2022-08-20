@@ -18,7 +18,7 @@ public class ProdutoController {
   @Autowired
   private ProdutoService service;
 
-  @GetMapping("/api/produto")
+  @GetMapping("/api/produtos")
   public ResponseEntity<List<Produto>> findAll(){
     return ResponseEntity.status(HttpStatus.OK).body(service.listAll());
   }
