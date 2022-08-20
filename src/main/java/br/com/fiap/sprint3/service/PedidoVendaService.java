@@ -2,7 +2,7 @@ package br.com.fiap.sprint3.service;
 
 import java.math.BigDecimal;
 import java.time.Instant;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +34,7 @@ public class PedidoVendaService {
     BigDecimal valorTotalItem = new BigDecimal(0);
     PedidoVenda pedidoVenda = new PedidoVenda();
     ItemPedidoVenda newItemPedidoVenda = new ItemPedidoVenda();
+    List<ItemPedidoVenda> listaitemPedidoVenda = new ArrayList<ItemPedidoVenda>();
     repo.save(pedidoVenda);
 
     for (ItemPedidoVenda item : itemPedidoVenda) {
@@ -46,10 +47,11 @@ public class PedidoVendaService {
       valorTotal(item.getQuantidadePedida(), item.getProduto().getPrecoUnitario()));
       // item.setPedidoVenda(pedidoVenda)
       repositoryItem.save(newItemPedidoVenda);
+      listaitemPedidoVenda.add(newItemPedidoVenda);
     }
     pedidoVenda.setValorTotalPedidoVenda(valorTotalItem);
     repo.save(pedidoVenda);
-    pedidoVenda.setItemPedidoVendas(itemPedidoVenda);
+    pedidoVenda.setItemPedidoVendas(listaitemPedidoVenda);
     return pedidoVenda;
 
 	}
