@@ -11,10 +11,11 @@ import org.springframework.stereotype.Service;
 
 import br.com.fiap.sprint3.model.ItemPedidoVenda;
 import br.com.fiap.sprint3.model.PedidoVenda;
-
+import br.com.fiap.sprint3.model.Produto;
 import br.com.fiap.sprint3.model.Usuario;
 import br.com.fiap.sprint3.repository.ItemPedidoVendaRepository;
 import br.com.fiap.sprint3.repository.PedidoVendaRepository;
+import br.com.fiap.sprint3.repository.ProdutoRepository;
 
 @Service
 public class PedidoVendaService {
@@ -25,8 +26,24 @@ public class PedidoVendaService {
 	@Autowired
 	ItemPedidoVendaRepository repositoryItem;
 
+	@Autowired
+	ProdutoRepository repositoryProduto;
+	
 	public PedidoVenda findById(Long id) {
-		return repo.findById(id).get();
+		
+		List<ItemPedidoVenda> listaitemPedidoVenda = new ArrayList<ItemPedidoVenda>();
+		listaitemPedidoVenda = repositoryItem.findAllByIdPedidoVendas(id);
+		
+		// for (ItemPedidoVenda itemPedidoVenda : listaitemPedidoVenda) {
+			// List<Produto> listaProduto = repositoryProduto.findAllByIdProduto(itemPedidoVenda.getProduto().getId());
+			// for (Produto produto : listaProduto) {
+			// 	itemPedidoVenda.setProduto(produto);
+			// }
+		// }
+		PedidoVenda pedidoVenda = repo.findById(id).get();
+		pedidoVenda.setItemPedidoVendas(listaitemPedidoVenda);
+		// System.out.println(listaitemPedidoVenda);
+		return pedidoVenda;
 	}
 
 	public PedidoVenda compra(Usuario usuario, List<ItemPedidoVenda> itemPedidoVenda) {
