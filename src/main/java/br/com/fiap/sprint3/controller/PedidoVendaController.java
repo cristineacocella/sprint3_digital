@@ -18,29 +18,26 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
-
 @RestController
 public class PedidoVendaController {
-  
-  @Autowired
-  private PedidoVendaService service;
 
-  @Autowired
-  private UsuarioService serviceUsuario;
+	@Autowired
+	private PedidoVendaService service;
 
-  @GetMapping("/api/pedidovenda/{IdPedidoVenda}")
-  public ResponseEntity<PedidoVenda> findById(@PathVariable Long IdPedidoVenda ) {
-      return ResponseEntity.status(HttpStatus.OK).body(service.findById(IdPedidoVenda));
-  }
-  
-  @PostMapping("/api/pedidovenda/{idUsuario}")
-	public ResponseEntity<PedidoVenda> compra(@PathVariable Long idUsuario, @RequestBody List<ItemPedidoVenda> itemPedidoVenda) {
-  
+	@Autowired
+	private UsuarioService serviceUsuario;
+
+	@GetMapping("/api/pedidovenda/{IdPedidoVenda}")
+	public ResponseEntity<PedidoVenda> findById(@PathVariable Long IdPedidoVenda) {
+		return ResponseEntity.status(HttpStatus.OK).body(service.findById(IdPedidoVenda));
+	}
+
+	@PostMapping("/api/pedidovenda/{idUsuario}")
+	public ResponseEntity<PedidoVenda> compra(@PathVariable Long idUsuario,
+			@RequestBody List<ItemPedidoVenda> itemPedidoVenda) {
 		Usuario usuario = serviceUsuario.findById(idUsuario);
-    PedidoVenda pedidoVenda = service.compra(usuario, itemPedidoVenda);
-
+		PedidoVenda pedidoVenda = service.compra(usuario, itemPedidoVenda);
 		return ResponseEntity.status(HttpStatus.OK).body(pedidoVenda);
 	}
- 
+
 }

@@ -1,6 +1,7 @@
 package br.com.fiap.sprint3.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,8 @@ public class ProdutoService {
     return repo.findAll();
   }
 
-  public Produto findById(Long  listaIdProdutos) {
-    return repo.findById(listaIdProdutos).get();
+  public Optional<Produto> findById(Long  listaIdProdutos) {
+    return repo.findById(listaIdProdutos);
   }
 
 }
