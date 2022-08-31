@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import br.com.fiap.sprint3.model.ItemPedidoVenda;
 
 import br.com.fiap.sprint3.repository.ItemPedidoVendaRepository;
-import br.com.fiap.sprint3.repository.PedidoVendaRepository;
 
 @Service
 public class ItemPedidoVendaService {
@@ -17,8 +16,6 @@ public class ItemPedidoVendaService {
 	@Autowired
 	ItemPedidoVendaRepository repo;
 
-	@Autowired
-	PedidoVendaRepository pedidoVendaRepository;
 
 	public List<ItemPedidoVenda> index() {
 		return repo.findAll();

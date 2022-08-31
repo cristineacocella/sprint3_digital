@@ -17,6 +17,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 @Entity
 @Table(name="T_CALI_PEDIDO_VENDA")
@@ -36,6 +38,7 @@ public class PedidoVenda {
   private Usuario usuario;
 
 
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
   @Column(name = "dt_pedido_venda")
   private Instant dataPedidoVenda;
   
